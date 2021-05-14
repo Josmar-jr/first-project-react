@@ -7,7 +7,7 @@ import { SectionHome } from "../styles/home";
 import { Button } from "../components/Button";
 import InputSearch from "../components/InputSearch";
 
-const Home = () => {
+export const Home = () => {
 
   const [posts, setPosts] = useState([]);
   const [allPosts, setAllPosts] = useState([]);
@@ -61,7 +61,7 @@ const Home = () => {
       <InputSearch handleChange={handleChange} searchValue={searchValue} />
 
       {filteredPosts.length === 0 ? (
-        <p>Não existe Posts!</p>
+        <p>Não existem Posts!</p>
       ) : (
         <Posts posts={filteredPosts} />
       )}
@@ -76,4 +76,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+

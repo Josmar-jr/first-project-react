@@ -14,11 +14,5 @@ export const PostCard = ({ attributes }) => {
 };
 
 PostCard.propTypes = {
-  attributes: P.objectOf(
-    P.shape({
-      title: P.string.isRequired,
-      cover: P.string.isRequired,
-      body: P.string.isRequired,
-      id: P.number.isRequired
-    }))
+  attributes: P.object.isRequired
 };

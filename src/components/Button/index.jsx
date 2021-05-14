@@ -1,4 +1,3 @@
-import P from 'prop-types';
 import { StyleButton } from './styles';
 
 export function Button({ nextPosts, disabled = false }) {
@@ -7,8 +6,5 @@ export function Button({ nextPosts, disabled = false }) {
   );
 }
 
-Button.defaultProps = {
-  disabled: false,
-};
 
 

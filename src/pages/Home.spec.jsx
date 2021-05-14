@@ -1,11 +1,67 @@
+import { rest } from 'msw';
+import { setupServer } from 'msw/node'
+
+import { render, screen, waitForElementToBeRemoved } from "@testing-library/react"
+import { Home } from "./Home";
+
+const handlers = [
+  rest.get('https://jsonplaceholder.typicode.com/posts',
+    async (req, res, ctx) => {
+      return res(ctx.json([
+        {
+          userId: 1,
+          id: 1,
+          title: "title 1",
+          body: "body 1"
+        },
+        {
+          userId: 2,
+          id: 2,
+          title: "title 2",
+          body: "body 2"
+        },
+        {
+          userId: 3,
+          id: 3,
+          title: "title 3",
+          body: "body 3"
+        },
+      ]));
+    }),
+  rest.get('https://jsonplaceholder.typicode.com/photos',
+    async (req, res, ctx) => {
+      return res(ctx.json([
+        {
+          url: 'file1.jpg'
+        },
+        {
+          url: 'file2.jpg'
+        },
+        {
+          url: 'file3.jpg'
+        },
+      ]));
+    })
+]
+
+const server = setupServer(...handlers)
+
 describe('<Home />', () => {
-  it('is a dummy test', () => {
-    expect(1).toBe(1)
+  beforeAll(() => {
+    server.listen();
   })
-  it('test two', () => {
-    expect(2).toBe(2)
+
+  afterEach(() => server.resetHandlers())
+
+  afterAll(() => {
+    server.close();
   })
-  it('test three', () => {
-    expect(3).toBe(3)
+
+  it('should render search, posts and load more', async () => {
+    const { debug } = render(<Home />);
+    const noMorePosts = screen.getByText('Não existem Posts!');
+
+    await waitForElementToBeRemoved(noMorePosts)
+    screen.debug()
   })
 })
