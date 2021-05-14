@@ -15,5 +15,5 @@ export const loadPosts = async () => {
     return { ...posts, cover: photosJson[index].url };
   });
 
-  return postsAndPhotos
-}
+  return postsAndPhotos;
+};

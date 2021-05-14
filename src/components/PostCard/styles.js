@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Post = styled.div`
   background: #c1c1c1;
@@ -6,7 +6,7 @@ export const Post = styled.div`
   padding: 1rem 0.8rem;
   transition: 0.3s ease-in-out;
   cursor: pointer;
-  box-shadow: 0 5px 10px rgba(0, 0, 0,2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 2);
 
   &:hover {
     transform: scale(1.04);

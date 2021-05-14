@@ -9,22 +9,22 @@ import InputSearch from "../components/InputSearch";
 
 const Home = () => {
 
-  const [posts, setPosts] = useState([])
-  const [allPosts, setAllPosts] = useState([])
-  const [page, setPage] = useState(0)
-  const [postsPerPage] = useState(3)
-  const [searchValue, setSearchValue] = useState('')
+  const [posts, setPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
+  const [page, setPage] = useState(0);
+  const [postsPerPage] = useState(3);
+  const [searchValue, setSearchValue] = useState('');
 
   const handleLoadPosts = useCallback(async (page, postsPerPage) => {
     const postsAndPhotos = await loadPosts();
 
-    setPosts(postsAndPhotos.slice(page, postsPerPage))
-    setAllPosts(postsAndPhotos)
+    setPosts(postsAndPhotos.slice(page, postsPerPage));
+    setAllPosts(postsAndPhotos);
   }, [])
 
   useEffect(() => {
-    handleLoadPosts(0, postsPerPage)
-  }, [handleLoadPosts, postsPerPage])
+    handleLoadPosts(0, postsPerPage);
+  }, [handleLoadPosts, postsPerPage]);
 
   const loadMorePosts = () => {
 
@@ -34,15 +34,15 @@ const Home = () => {
 
     setPosts(posts)
     setPage(nextPage)
-  }
+  };
 
   const handleChange = event => {
     const { value } = event.target
 
     setSearchValue(value)
-  }
+  };
 
-  const noMorePosts = page + postsPerPage >= allPosts.length
+  const noMorePosts = page + postsPerPage >= allPosts.length;
 
   const filteredPosts = !!searchValue ?
     allPosts.filter(({ title }) => {
@@ -50,7 +50,7 @@ const Home = () => {
         searchValue.toLowerCase()
       );
     })
-    : posts
+    : posts;
 
   return (
     <SectionHome>
@@ -74,6 +74,6 @@ const Home = () => {
       )}
     </SectionHome>
   );
-}
+};
 
 export default Home;

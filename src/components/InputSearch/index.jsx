@@ -1,9 +1,11 @@
 import React from 'react';
 import { InputMain } from './styles';
 
+import P from 'prop-types';
+
 // import { Container } from './styles';
 
-function InputSearch({ handleChange, searchValue }) {
+export default function InputSearch({ handleChange, searchValue }) {
 
   return (
     <InputMain
@@ -12,7 +14,11 @@ function InputSearch({ handleChange, searchValue }) {
       value={searchValue}
       placeholder="Do your research"
     />
-  );
+  )
 }
 
-export default InputSearch;
+InputSearch.propTypes = {
+  searchValue: P.string.isRequired,
+  handleChange: P.func.isRequired
+}
+
