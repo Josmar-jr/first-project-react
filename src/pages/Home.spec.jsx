@@ -62,6 +62,15 @@ describe('<Home />', () => {
     const noMorePosts = screen.getByText('Não existem Posts!');
 
     await waitForElementToBeRemoved(noMorePosts)
-    screen.debug()
+
+    const search = screen.getByPlaceholderText(/research/);
+
+    expect(search).toBeInTheDocument();
+
+    const images = screen.getAllByRole('img', { name: /title/i });
+    expect(images).toHaveLength(3);
+
+    const button = screen.getByRole('button', { name: /Load/i });
+    expect(button).toBeInTheDocument();
   })
 })
