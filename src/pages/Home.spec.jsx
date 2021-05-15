@@ -3,6 +3,7 @@ import { setupServer } from 'msw/node'
 
 import { render, screen, waitForElementToBeRemoved } from "@testing-library/react"
 import { Home } from "./Home";
+import userEvent from '@testing-library/user-event';
 
 const handlers = [
   rest.get('https://jsonplaceholder.typicode.com/posts',
@@ -72,5 +73,24 @@ describe('<Home />', () => {
 
     const button = screen.getByRole('button', { name: /Load/i });
     expect(button).toBeInTheDocument();
+  })
+
+  it('should search for posts', async () => {
+    const { debug } = render(<Home />);
+    const noMorePosts = screen.getByText('Não existem Posts!');
+
+    await waitForElementToBeRemoved(noMorePosts)
+
+    const search = screen.getByPlaceholderText(/research/);
+
+    userEvent.clear(search, /title 1/i)
+    expect(screen.getByRole('heading', { name: /title 1/i }))
+    .toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /title 2/i }))
+    .toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /title 3/i }))
+    .toBeInTheDocument()
+
+
   })
 })
